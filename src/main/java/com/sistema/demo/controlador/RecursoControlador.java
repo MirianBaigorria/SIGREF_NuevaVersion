@@ -24,6 +24,11 @@ public class RecursoControlador {
         return ResponseEntity.ok(recursos);
     }
 
+    @GetMapping("/contar")
+    private ResponseEntity<?> contarTodos(){
+        return ResponseEntity.ok(recursoServicio.contarRecursos());
+    }
+
     @GetMapping("/{id}")
     private ResponseEntity<?> mostrarUno(@PathVariable Long id){
         try{

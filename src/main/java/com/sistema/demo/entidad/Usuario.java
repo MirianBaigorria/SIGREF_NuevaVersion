@@ -1,5 +1,6 @@
 package com.sistema.demo.entidad;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sistema.demo.entidad.enums.Rol;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -23,12 +24,15 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "generadoPor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Reporte> reportes;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "generadoPor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Movimiento> movimientos;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "generadoPor", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Solicitud> solicitudes;
 

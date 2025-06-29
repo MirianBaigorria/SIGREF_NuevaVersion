@@ -20,6 +20,10 @@ public class RecursoServicio {
         return recursoRepositorio.findAll();
     }
 
+    public Long contarRecursos(){
+        return recursoRepositorio.count();
+    }
+
     public Recurso mostrarUnRecurso(Long id) {
         return recursoRepositorio.findById(id).orElseThrow(() -> new EntityNotFoundException("Recurso no encontrado"));
     }

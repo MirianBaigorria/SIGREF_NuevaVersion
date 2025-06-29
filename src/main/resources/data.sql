@@ -1,10 +1,10 @@
 -- Insertar Usuarios
 INSERT INTO usuario (nombre, nombre_usuario, contrasenia, rol) VALUES
-('Juan Pérez', 'jperez', '1234', 'ADMIN'),
-('Maria López', 'mlopez', 'abcd', 'USUARIO'),
-('Carlos Ruiz', 'cruiz', 'qwerty', 'USUARIO'),
-('Laura García', 'lgarcia', 'pass', 'USUARIO'),
-('Pedro Gómez', 'pgomez', 'admin', 'ADMIN');
+('Juan Pérez', 'jperez', '1234', 'ADMINISTRADOR'),
+('Maria López', 'mlopez', 'abcd', 'OPERADOR'),
+('Carlos Ruiz', 'cruiz', 'qwerty', 'OPERADOR'),
+('Laura García', 'lgarcia', 'pass', 'OPERADOR'),
+('Pedro Gómez', 'pgomez', 'admin', 'ADMINISTRADOR');
 
 -- Insertar Recursos
 INSERT INTO recurso (nombre, descripcion, codigo, cantidad, minimo, ubicacion, estado, categoria) VALUES
