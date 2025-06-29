@@ -1,6 +1,7 @@
 package com.sistema.demo.servicio;
 
 import com.sistema.demo.entidad.Recurso;
+import com.sistema.demo.entidad.enums.Categoria;
 import com.sistema.demo.repositorio.RecursoRepositorio;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,4 +54,35 @@ public class RecursoServicio {
         return "El recurso ya fue dado de baja anteriormente.";
     }
 
+    public Recurso crearRecurso(Recurso recurso) {
+        recurso.setEstado(true);
+        return recursoRepositorio.save(recurso);
+    }
+
+    public Recurso actualizarRecurso(Long id, Recurso recursoActualizado) {
+        Recurso recursoExistente = this.mostrarUnRecurso(id);
+
+        recursoExistente.setNombre(recursoActualizado.getNombre());
+        recursoExistente.setDescripcion(recursoActualizado.getDescripcion());
+        recursoExistente.setCodigo(recursoActualizado.getCodigo());
+        recursoExistente.setCantidad(recursoActualizado.getCantidad());
+        recursoExistente.setMinimo(recursoActualizado.getMinimo());
+        recursoExistente.setUbicacion(recursoActualizado.getUbicacion());
+        recursoExistente.setCategoria(recursoActualizado.getCategoria());
+        recursoExistente.setEstado(recursoActualizado.getEstado());
+
+        return recursoRepositorio.saveAndFlush(recursoExistente);
+    }
+
+    public List<Recurso> buscarPorNombre(String nombre) {
+        return recursoRepositorio.findByNombreContainingIgnoreCase(nombre);
+    }
+
+    public List<Recurso> buscarPorCodigo(String codigo) {
+        return recursoRepositorio.findByCodigoContainingIgnoreCase(codigo);
+    }
+
+    public List<Recurso> buscarPorCategoria(Categoria categoria) {
+        return recursoRepositorio.findByCategoria(categoria);
+    }
 }

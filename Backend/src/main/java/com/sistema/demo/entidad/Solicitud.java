@@ -17,6 +17,7 @@ public class Solicitud {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String codigoSolicitud;
     private Date fecha;
     private String nombreSolicitante;
     private String destino;

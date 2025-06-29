@@ -1,6 +1,7 @@
 package com.sistema.demo.controlador;
 
 import com.sistema.demo.entidad.Recurso;
+import com.sistema.demo.entidad.enums.Categoria;
 import com.sistema.demo.servicio.RecursoServicio;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,5 +59,35 @@ public class RecursoControlador {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: " + e.getMessage());
         }
     }
+
+    @PostMapping
+    public ResponseEntity<?> crear(@RequestBody Recurso recurso) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(recursoServicio.crearRecurso(recurso));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> actualizar(@PathVariable Long id, @RequestBody Recurso recurso) {
+        try {
+            return ResponseEntity.ok(recursoServicio.actualizarRecurso(id, recurso));
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: " + e.getMessage());
+        }
+    }
+
+    @GetMapping("/buscarPorNombre")
+    public ResponseEntity<List<Recurso>> buscarPorNombre(@RequestParam String nombre) {
+        return ResponseEntity.ok(recursoServicio.buscarPorNombre(nombre));
+    }
+
+    @GetMapping("/buscarPorCodigo")
+    public ResponseEntity<List<Recurso>> buscarPorCodigo(@RequestParam String codigo) {
+        return ResponseEntity.ok(recursoServicio.buscarPorCodigo(codigo));
+    }
+
+    @GetMapping("/buscarPorCategoria")
+    public ResponseEntity<List<Recurso>> buscarPorCategoria(@RequestParam Categoria categoria) {
+        return ResponseEntity.ok(recursoServicio.buscarPorCategoria(categoria));
+    }
+
 
 }
