@@ -39,6 +39,7 @@ CREATE TABLE solicitud (
     nombre_solicitante VARCHAR(255),
     destino VARCHAR(255),
     cantidad INT,
+    activo BOOLEAN,
     tipo VARCHAR(50),
     usuario_id BIGINT,
     recurso_id BIGINT,

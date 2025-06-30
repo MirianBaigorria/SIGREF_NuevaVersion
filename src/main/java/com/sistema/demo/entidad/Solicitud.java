@@ -16,12 +16,13 @@ public class Solicitud {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String codigoSolicitud;
+
     private Date fecha;
     private String nombreSolicitante;
     private String destino;
     private int cantidad;
+    private Boolean activo;
 
     @Enumerated(EnumType.STRING)
     private Tipo tipo;

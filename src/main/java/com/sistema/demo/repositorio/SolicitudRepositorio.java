@@ -9,5 +9,5 @@ import java.util.Optional;
 
 public interface SolicitudRepositorio extends JpaRepository<Solicitud, Long> {
     Optional<Solicitud> findByCodigoSolicitudAndTipo(String codigo, Tipo tipo);
-    List<Solicitud> findByTipo(Tipo tipo);
+    List<Solicitud> findByTipoAndActivo(Tipo tipo, Boolean activo);
 }

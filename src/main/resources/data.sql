@@ -11,8 +11,8 @@ INSERT INTO recurso (nombre, descripcion, codigo, cantidad, minimo, ubicacion, e
 ('Impresora HP', 'Impresora láser', 'IMP001', 10, 2, 'Oficina A', true, 'INFORMATICO'),
 ('Silla ergonómica', 'Silla para oficina', 'SIL001', 15, 5, 'Deposito', true, 'MOBILIARIO'),
 ('PC Escritorio', 'Computadora de escritorio', 'PC001', 5, 1, 'Sala B', true, 'INFORMATICO'),
-('Proyector', 'Proyector de presentaciones', 'PRO001', 2, 1, 'Sala de Reuniones', true, 'OFICINA'),
-('Mesa Reunión', 'Mesa grande', 'MES001', 3, 1, 'Sala de Reuniones', true, 'MOBILIARIO');
+('Proyector', 'Proyector de presentaciones', 'PRO001', 2, 4, 'Sala de Reuniones', true, 'OFICINA'),
+('Mesa Reunión', 'Mesa grande', 'MES001', 3, 5, 'Sala de Reuniones', true, 'MOBILIARIO');
 
 -- Insertar Movimientos
 INSERT INTO movimiento (fecha, tipo, cantidad, motivo, usuario_id, recurso_id) VALUES
@@ -23,12 +23,12 @@ INSERT INTO movimiento (fecha, tipo, cantidad, motivo, usuario_id, recurso_id) V
 (CURRENT_DATE, 'INGRESO', 4, 'Donación', 5, 5);
 
 -- Insertar Solicitudes
-INSERT INTO solicitud (codigo_solicitud, fecha, nombre_solicitante, destino, cantidad, tipo, usuario_id, recurso_id) VALUES
-('SOL001', CURRENT_DATE, 'Javier', 'Aula 1', 2, 'PRESTAMO', 2, 1),
-('SOL002', CURRENT_DATE, 'Ana', 'Oficina 3', 1, 'PRESTAMO', 3, 2),
-('SOL003', CURRENT_DATE, 'Luis', 'Deposito', 3, 'PRESTAMO', 4, 3),
-('SOL004', CURRENT_DATE, 'Sara', 'Sala B', 1, 'DEVOLUCION', 5, 4),
-('SOL005', CURRENT_DATE, 'Marta', 'Oficina Principal', 2, 'PRESTAMO', 1, 5);
+INSERT INTO solicitud (codigo_solicitud, fecha, nombre_solicitante, destino, cantidad, activo, tipo, usuario_id, recurso_id) VALUES
+('SOL001', CURRENT_DATE, 'Javier', 'Aula 1', 2, true, 'PRESTAMO', 2, 1),
+('SOL002', CURRENT_DATE, 'Ana', 'Oficina 3', 1, false, 'ENTREGA', 3, 2),
+('SOL003', CURRENT_DATE, 'Luis', 'Deposito', 3, true, 'PRESTAMO', 4, 3),
+('SOL004', CURRENT_DATE, 'Sara', 'Sala B', 1, false, 'ENTREGA', 5, 4),
+('SOL005', CURRENT_DATE, 'Marta', 'Oficina Principal', 2, false, 'PRESTAMO', 1, 5);
 
 -- Insertar Reportes
 INSERT INTO reporte (tipo, fecha_generacion, usuario_id) VALUES

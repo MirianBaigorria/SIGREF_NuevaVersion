@@ -70,15 +70,17 @@ public class SolicitudServicio {
         solicitud.setGeneradoPor(usuario);
         solicitud.setRecurso(recurso);
         solicitud.setFecha(new Date());
+        solicitud.setActivo(true);
+        solicitud.setCodigoSolicitud("SOL00" + (this.listarSolicitudes().size()+1));
 
         return solicitudRepositorio.save(solicitud);
     }
 
-    public List<Solicitud> solicitudesPendientes() {
-        return solicitudRepositorio.findByTipo(Tipo.PRESTAMO);
+    public List<Solicitud> prestamosPendientes() {
+        return solicitudRepositorio.findByTipoAndActivo(Tipo.PRESTAMO, true);
     }
 
-    public String registrarDevolucion(String codigoSolicitud, Solicitud devolucion) {
+    /*public String registrarDevolucion(String codigoSolicitud, Solicitud devolucion) {
         Optional<Solicitud> devolucionExistente = solicitudRepositorio.findByCodigoSolicitudAndTipo(codigoSolicitud, Tipo.DEVOLUCION);
 
         if (devolucionExistente.isPresent()) {
@@ -99,5 +101,5 @@ public class SolicitudServicio {
 
         solicitudRepositorio.save(devolucion);
         return "Devolución registrada correctamente.";
-    }
+    }*/
 }

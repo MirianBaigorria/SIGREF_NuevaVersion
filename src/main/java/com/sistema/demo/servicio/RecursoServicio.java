@@ -20,8 +20,23 @@ public class RecursoServicio {
         return recursoRepositorio.findAll();
     }
 
+    public List<Recurso> mostrarRecursosActivos() {
+        return recursoRepositorio.findByEstado(true);
+    }
+
     public Long contarRecursos(){
         return recursoRepositorio.count();
+    }
+
+    public int contarAlertas() {
+        List<Recurso> recursos = this.mostrarRecursos().stream().toList();
+        int cant = 0;
+        for (Recurso recurso : recursos){
+            if (this.esStockMinimo(recurso.getId())){
+                cant++;
+            }
+        }
+        return cant;
     }
 
     public Recurso mostrarUnRecurso(Long id) {
@@ -88,5 +103,12 @@ public class RecursoServicio {
 
     public List<Recurso> buscarPorCategoria(Categoria categoria) {
         return recursoRepositorio.findByCategoria(categoria);
+    }
+
+    public List<Recurso> listarStockMinimo(){
+        List<Recurso> stockMinimo = recursoRepositorio.findAll().stream()
+                .filter(r -> r.getCantidad() <= r.getMinimo())
+                .toList();
+        return stockMinimo;
     }
 }

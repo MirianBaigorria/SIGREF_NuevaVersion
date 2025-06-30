@@ -72,7 +72,7 @@ public class ReporteServicio {
 
         switch (tipoReporte.toLowerCase()) {
             case "prestamos":
-                List<Solicitud> prestamos = solicitudRepositorio.findByTipo(Tipo.PRESTAMO);
+                List<Solicitud> prestamos = solicitudRepositorio.findByTipoAndActivo(Tipo.PRESTAMO, true);
                 return prestamos;
 
             case "inventario":

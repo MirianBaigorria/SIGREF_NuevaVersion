@@ -24,9 +24,21 @@ public class RecursoControlador {
         return ResponseEntity.ok(recursos);
     }
 
-    @GetMapping("/contar")
+    @GetMapping("/activos")
+    private ResponseEntity<?> mostrarActivos(){
+        List<Recurso> recursos = recursoServicio.mostrarRecursosActivos();
+        return ResponseEntity.ok(recursos);
+    }
+
+    @GetMapping("/contar/todosLosRecursos")
     private ResponseEntity<?> contarTodos(){
         return ResponseEntity.ok(recursoServicio.contarRecursos());
+    }
+
+
+    @GetMapping("/contar/alertaStock")
+    private ResponseEntity<?> contarAlertas(){
+        return ResponseEntity.ok(recursoServicio.contarAlertas());
     }
 
     @GetMapping("/{id}")
@@ -94,5 +106,9 @@ public class RecursoControlador {
         return ResponseEntity.ok(recursoServicio.buscarPorCategoria(categoria));
     }
 
+    @GetMapping("/listarStockMinimo")
+    public ResponseEntity<?> listarStockMin(){
+        return ResponseEntity.ok(recursoServicio.listarStockMinimo());
+    }
 
 }

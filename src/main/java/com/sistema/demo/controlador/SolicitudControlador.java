@@ -66,16 +66,17 @@ public class SolicitudControlador {
     }
 
     @GetMapping("/pendientes")
-    public ResponseEntity<List<Solicitud>> pendientes() {
-        return ResponseEntity.ok(solicitudServicio.solicitudesPendientes());
+    public ResponseEntity<?> pendientes() {
+        int cant = solicitudServicio.prestamosPendientes().size();
+        return ResponseEntity.ok(cant);
     }
 
-    @PostMapping("/devolucion")
+   /* @PostMapping("/devolucion")
     public ResponseEntity<?> registrarDevolucion(@RequestParam String codigoSolicitud, @RequestBody Solicitud devolucion) {
         String resultado = solicitudServicio.registrarDevolucion(codigoSolicitud, devolucion);
         if (resultado.startsWith("Error")) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(resultado);
         }
         return ResponseEntity.ok(resultado);
-    }
+    }*/
 }
