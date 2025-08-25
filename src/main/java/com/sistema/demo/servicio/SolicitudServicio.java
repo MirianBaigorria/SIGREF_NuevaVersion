@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -67,6 +68,13 @@ public class SolicitudServicio {
         Recurso recurso = recursoRepositorio.findById(idRecurso)
                 .orElseThrow(() -> new EntityNotFoundException("Recurso no encontrado"));
 
+        if (recurso.getCantidad() < solicitud.getCantidad()){
+            throw new NoSuchElementException("El recurso no posee la cantidad suficiente para cumplir con la solicitud.");
+        }
+
+        recurso.setCantidad(recurso.getCantidad() - solicitud.getCantidad());
+        System.out.println(recurso.getCantidad());
+        recursoRepositorio.saveAndFlush(recurso);
         solicitud.setGeneradoPor(usuario);
         solicitud.setRecurso(recurso);
         solicitud.setFecha(new Date());

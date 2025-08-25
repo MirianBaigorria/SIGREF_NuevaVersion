@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
   contarPrestamosPendientes();
   agregarAlertaStockMinimo();
   listarRecursos();
+  cargarRecursos();
 });
 
 document.addEventListener("click", function (event) {
@@ -416,6 +417,8 @@ function cargarRecursos(){
   fetch("http://localhost:8080/api/recursos/activos")
     .then((response) => response.json())
     .then((data) => {
+      console.log(data);
+      
       const selectRecurso = document.getElementById("select-recurso");
       selectRecurso.innerHTML = ""; // Limpiar opciones previas
       const optionDefault = document.createElement("option");
@@ -543,6 +546,8 @@ function showResourceForm(action) {
 
 // Mostrar/ocultar formularios en préstamos
 function showLoanForm(action) {
+  
+  
   if (action === "prestamo") {
     document.getElementById("form-prestamo").classList.remove("hidden");
     document.getElementById("form-devolucion").classList.add("hidden");
@@ -550,6 +555,7 @@ function showLoanForm(action) {
   } else {
     document.getElementById("form-prestamo").classList.add("hidden");
     document.getElementById("form-devolucion").classList.remove("hidden");
+    cargarRecursos();
   }
 }
 
