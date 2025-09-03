@@ -4,7 +4,8 @@ INSERT INTO usuario (nombre, nombre_usuario, contrasenia, rol) VALUES
 ('Maria López', 'mlopez', 'abcd', 'OPERADOR'),
 ('Carlos Ruiz', 'cruiz', 'qwerty', 'OPERADOR'),
 ('Laura García', 'lgarcia', 'pass', 'OPERADOR'),
-('Pedro Gómez', 'pgomez', 'admin', 'ADMINISTRADOR');
+('Pedro Gómez', 'pgomez', 'admin', 'ADMINISTRADOR'),
+('Mirian Baigorria', 'mbaigo', 'admin', 'ADMINISTRADOR');;
 
 -- Insertar Recursos
 INSERT INTO recurso (nombre, descripcion, codigo, cantidad, minimo, ubicacion, estado, categoria) VALUES
