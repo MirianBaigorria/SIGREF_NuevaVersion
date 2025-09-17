@@ -1,10 +1,10 @@
 package com.sistema.demo.servicio;
 
 import com.sistema.demo.entidad.Movimiento;
-import com.sistema.demo.entidad.Recurso;
+import com.sistema.demo.entidad.insumo;
 import com.sistema.demo.entidad.Usuario;
 import com.sistema.demo.repositorio.MovimientoRepositorio;
-import com.sistema.demo.repositorio.RecursoRepositorio;
+import com.sistema.demo.repositorio.InsumoRepositorio;
 import com.sistema.demo.repositorio.UsuarioRepositorio;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class MovimientoServicio {
     private UsuarioRepositorio usuarioRepositorio;
 
     @Autowired
-    private RecursoRepositorio recursoRepositorio;
+    private InsumoRepositorio insumoRepositorio;
 
     public List<Movimiento> listarMovimientos() {
         return movimientoRepositorio.findAll();
@@ -45,7 +45,7 @@ public class MovimientoServicio {
         movimientoExistente.setCantidad(movimientoActualizado.getCantidad());
         movimientoExistente.setMotivo(movimientoActualizado.getMotivo());
         movimientoExistente.setGeneradoPor(movimientoActualizado.getGeneradoPor());
-        movimientoExistente.setRecurso(movimientoActualizado.getRecurso());
+        movimientoExistente.setInsumo(movimientoActualizado.getInsumo());
 
         return movimientoRepositorio.saveAndFlush(movimientoExistente);
     }
@@ -58,11 +58,11 @@ public class MovimientoServicio {
         Usuario usuario = usuarioRepositorio.findById(idUsuario)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
 
-        Recurso recurso = recursoRepositorio.findById(idRecurso)
+        insumo insumo = insumoRepositorio.findById(idRecurso)
                 .orElseThrow(() -> new EntityNotFoundException("Recurso no encontrado"));
 
         movimiento.setGeneradoPor(usuario);
-        movimiento.setRecurso(recurso);
+        movimiento.setInsumo(insumo);
 
         return movimientoRepositorio.save(movimiento);
     }

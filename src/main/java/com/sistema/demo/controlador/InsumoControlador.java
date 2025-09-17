@@ -1,8 +1,8 @@
 package com.sistema.demo.controlador;
 
-import com.sistema.demo.entidad.Recurso;
+import com.sistema.demo.entidad.insumo;
 import com.sistema.demo.entidad.enums.Categoria;
-import com.sistema.demo.servicio.RecursoServicio;
+import com.sistema.demo.servicio.InsumoServicio;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,38 +13,38 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/recursos")
-public class RecursoControlador {
+public class InsumoControlador {
 
     @Autowired
-    private RecursoServicio recursoServicio;
+    private InsumoServicio insumoServicio;
 
     @GetMapping
     private ResponseEntity<?> mostrarTodos() {
-        List<Recurso> recursos = recursoServicio.mostrarRecursos();
-        return ResponseEntity.ok(recursos);
+        List<insumo> insumo = insumoServicio.mostrarRecursos();
+        return ResponseEntity.ok(insumo);
     }
 
     @GetMapping("/activos")
     private ResponseEntity<?> mostrarActivos(){
-        List<Recurso> recursos = recursoServicio.mostrarRecursosActivos();
-        return ResponseEntity.ok(recursos);
+        List<insumo> insumos = insumoServicio.mostrarRecursosActivos();
+        return ResponseEntity.ok(insumos);
     }
 
     @GetMapping("/contar/todosLosRecursos")
     private ResponseEntity<?> contarTodos(){
-        return ResponseEntity.ok(recursoServicio.contarRecursos());
+        return ResponseEntity.ok(insumoServicio.contarRecursos());
     }
 
 
     @GetMapping("/contar/alertaStock")
     private ResponseEntity<?> contarAlertas(){
-        return ResponseEntity.ok(recursoServicio.contarAlertas());
+        return ResponseEntity.ok(insumoServicio.contarAlertas());
     }
 
     @GetMapping("/{id}")
     private ResponseEntity<?> mostrarUno(@PathVariable Long id){
         try{
-            return ResponseEntity.ok(recursoServicio.mostrarUnRecurso(id));
+            return ResponseEntity.ok(insumoServicio.mostrarUnRecurso(id));
         } catch (EntityNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: " + e.getMessage());
         }
@@ -53,7 +53,7 @@ public class RecursoControlador {
     @PatchMapping("/{id}/actualizarStock")
     private ResponseEntity<?> actualizarStock(@PathVariable Long id, @RequestParam("ingreso") Boolean esIngreso, @RequestParam("cant") int cantidad){
         try{
-            return ResponseEntity.ok(recursoServicio.actualizarStockRecurso(id, esIngreso, cantidad));
+            return ResponseEntity.ok(insumoServicio.actualizarStockRecurso(id, esIngreso, cantidad));
         } catch (EntityNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: " + e.getMessage());
         }
@@ -62,7 +62,7 @@ public class RecursoControlador {
     @GetMapping("/{id}/estaEnMinimo")
     private ResponseEntity<?> estaEnMinimo(@PathVariable Long id){
         try{
-            return ResponseEntity.ok(recursoServicio.esStockMinimo(id));
+            return ResponseEntity.ok(insumoServicio.esStockMinimo(id));
         } catch (EntityNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: " + e.getMessage());
         }
@@ -71,44 +71,44 @@ public class RecursoControlador {
     @PatchMapping("/{id}/darDeBaja")
     private ResponseEntity<?> darDeBaja(@PathVariable Long id){
         try{
-            return ResponseEntity.ok(recursoServicio.darDeBajaRecurso(id));
+            return ResponseEntity.ok(insumoServicio.darDeBajaRecurso(id));
         } catch (EntityNotFoundException e){
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: " + e.getMessage());
         }
     }
 
     @PostMapping
-    public ResponseEntity<?> crear(@RequestBody Recurso recurso) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(recursoServicio.crearRecurso(recurso));
+    public ResponseEntity<?> crear(@RequestBody insumo insumo) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(insumoServicio.crearRecurso(insumo));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> actualizar(@PathVariable Long id, @RequestBody Recurso recurso) {
+    public ResponseEntity<?> actualizar(@PathVariable Long id, @RequestBody insumo insumo) {
         try {
-            return ResponseEntity.ok(recursoServicio.actualizarRecurso(id, recurso));
+            return ResponseEntity.ok(insumoServicio.actualizarRecurso(id, insumo));
         } catch (EntityNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Error: " + e.getMessage());
         }
     }
 
     @GetMapping("/buscarPorNombre")
-    public ResponseEntity<List<Recurso>> buscarPorNombre(@RequestParam String nombre) {
-        return ResponseEntity.ok(recursoServicio.buscarPorNombre(nombre));
+    public ResponseEntity<List<insumo>> buscarPorNombre(@RequestParam String nombre) {
+        return ResponseEntity.ok(insumoServicio.buscarPorNombre(nombre));
     }
 
     @GetMapping("/buscarPorCodigo")
-    public ResponseEntity<List<Recurso>> buscarPorCodigo(@RequestParam String codigo) {
-        return ResponseEntity.ok(recursoServicio.buscarPorCodigo(codigo));
+    public ResponseEntity<List<insumo>> buscarPorCodigo(@RequestParam String codigo) {
+        return ResponseEntity.ok(insumoServicio.buscarPorCodigo(codigo));
     }
 
     @GetMapping("/buscarPorCategoria")
-    public ResponseEntity<List<Recurso>> buscarPorCategoria(@RequestParam Categoria categoria) {
-        return ResponseEntity.ok(recursoServicio.buscarPorCategoria(categoria));
+    public ResponseEntity<List<insumo>> buscarPorCategoria(@RequestParam Categoria categoria) {
+        return ResponseEntity.ok(insumoServicio.buscarPorCategoria(categoria));
     }
 
     @GetMapping("/listarStockMinimo")
     public ResponseEntity<?> listarStockMin(){
-        return ResponseEntity.ok(recursoServicio.listarStockMinimo());
+        return ResponseEntity.ok(insumoServicio.listarStockMinimo());
     }
 
 }

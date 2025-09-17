@@ -12,13 +12,13 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Recurso {
+public class insumo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
     private String descripcion;
-    private String codigo;
+    //private String codigo;
     private int cantidad;
     private int minimo;
     private String ubicacion;

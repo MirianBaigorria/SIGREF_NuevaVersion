@@ -33,5 +33,5 @@ public class Solicitud {
 
     @ManyToOne
     @JoinColumn(name = "recurso_id")
-    private Recurso recurso;
+    private insumo insumo;
 }

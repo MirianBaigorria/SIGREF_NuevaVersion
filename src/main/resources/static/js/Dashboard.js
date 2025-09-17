@@ -156,9 +156,9 @@ function listarRecursos() {
         id.style = "display: none;";
         id.id = "id-recurso-" + recurso.id;
 
-        const codigo = document.createElement("td");
-        codigo.textContent = recurso.codigo;
-        codigo.className = "px-6 py-4 whitespace-nowrap text-sm text-gray-500";
+        //const codigo = document.createElement("td");
+       // codigo.textContent = recurso.codigo;
+        //codigo.className = "px-6 py-4 whitespace-nowrap text-sm text-gray-500";
 
         const nombre = document.createElement("td");
         nombre.textContent = recurso.nombre;
@@ -199,7 +199,7 @@ function listarRecursos() {
             recurso.nombre;
           document.getElementById("modificar-rec-cat").value =
             recurso.categoria.toLowerCase();
-          document.getElementById("modificar-rec-cod").value = recurso.codigo;
+          //document.getElementById("modificar-rec-cod").value = recurso.codigo;
           document.getElementById("modificar-rec-cant").value =
             recurso.cantidad;
           document.getElementById("modificar-rec-min").value = recurso.minimo;
@@ -236,7 +236,7 @@ function listarRecursos() {
         eliminar.appendChild(eliminarIcon);
 
         columna.appendChild(id);
-        columna.appendChild(codigo);
+        //columna.appendChild(codigo);
         columna.appendChild(nombre);
         columna.appendChild(categoria);
         recurso.cantidad <= recurso.minimo ? stock.appendChild(minimo) : null;
@@ -263,7 +263,7 @@ function crearRecurso() {
   const recurso = {
     nombre: document.getElementById("registro-rec-nombre").value,
     categoria: document.getElementById("registro-rec-cat").value.toUpperCase(),
-    codigo: document.getElementById("registro-rec-cod").value,
+    //codigo: document.getElementById("registro-rec-cod").value,
     cantidad: document.getElementById("registro-rec-cant").value,
     minimo: document.getElementById("registro-rec-min").value,
     ubicacion: document.getElementById("registro-rec-ubicacion").value,
@@ -285,7 +285,7 @@ function modificarRecurso() {
   const recurso = {
     nombre: document.getElementById("modificar-rec-nombre").value,
     categoria: document.getElementById("modificar-rec-cat").value.toUpperCase(),
-    codigo: document.getElementById("modificar-rec-cod").value,
+    //codigo: document.getElementById("modificar-rec-cod").value,
     cantidad: document.getElementById("modificar-rec-cant").value,
     minimo: document.getElementById("modificar-rec-min").value,
     ubicacion: document.getElementById("modificar-rec-ubicacion").value,
@@ -322,7 +322,7 @@ function generarReporteStockMinimoPDF(recursos) {
       "ID",
       "Nombre",
       "Descripción",
-      "Código",
+      //"Código",
       "Cantidad",
       "Mínimo",
       "Ubicación",
@@ -333,7 +333,7 @@ function generarReporteStockMinimoPDF(recursos) {
       rec.id,
       rec.nombre,
       rec.descripcion,
-      rec.codigo,
+      //rec.codigo,
       rec.cantidad,
       rec.minimo,
       rec.ubicacion,

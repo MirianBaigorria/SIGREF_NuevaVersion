@@ -1,10 +1,10 @@
 package com.sistema.demo.servicio;
 
-import com.sistema.demo.entidad.Recurso;
+import com.sistema.demo.entidad.insumo;
 import com.sistema.demo.entidad.Solicitud;
 import com.sistema.demo.entidad.Usuario;
 import com.sistema.demo.entidad.enums.Tipo;
-import com.sistema.demo.repositorio.RecursoRepositorio;
+import com.sistema.demo.repositorio.InsumoRepositorio;
 import com.sistema.demo.repositorio.SolicitudRepositorio;
 import com.sistema.demo.repositorio.UsuarioRepositorio;
 import jakarta.persistence.EntityNotFoundException;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class SolicitudServicio {
@@ -26,7 +25,7 @@ public class SolicitudServicio {
     private UsuarioRepositorio usuarioRepositorio;
 
     @Autowired
-    private RecursoRepositorio recursoRepositorio;
+    private InsumoRepositorio insumoRepositorio;
 
 
     public List<Solicitud> listarSolicitudes() {
@@ -52,7 +51,7 @@ public class SolicitudServicio {
         solicitudExistente.setCantidad(solicitudActualizada.getCantidad());
         solicitudExistente.setTipo(solicitudActualizada.getTipo());
         solicitudExistente.setGeneradoPor(solicitudActualizada.getGeneradoPor());
-        solicitudExistente.setRecurso(solicitudActualizada.getRecurso());
+        solicitudExistente.setInsumo(solicitudActualizada.getInsumo());
 
         return solicitudRepositorio.saveAndFlush(solicitudExistente);
     }
@@ -65,18 +64,18 @@ public class SolicitudServicio {
         Usuario usuario = usuarioRepositorio.findById(idUsuario)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
 
-        Recurso recurso = recursoRepositorio.findById(idRecurso)
+        insumo insumo = insumoRepositorio.findById(idRecurso)
                 .orElseThrow(() -> new EntityNotFoundException("Recurso no encontrado"));
 
-        if (recurso.getCantidad() < solicitud.getCantidad()){
+        if (insumo.getCantidad() < solicitud.getCantidad()){
             throw new NoSuchElementException("El recurso no posee la cantidad suficiente para cumplir con la solicitud.");
         }
 
-        recurso.setCantidad(recurso.getCantidad() - solicitud.getCantidad());
-        System.out.println(recurso.getCantidad());
-        recursoRepositorio.saveAndFlush(recurso);
+        insumo.setCantidad(insumo.getCantidad() - solicitud.getCantidad());
+        System.out.println(insumo.getCantidad());
+        insumoRepositorio.saveAndFlush(insumo);
         solicitud.setGeneradoPor(usuario);
-        solicitud.setRecurso(recurso);
+        solicitud.setInsumo(insumo);
         solicitud.setFecha(new Date());
         solicitud.setActivo(true);
         solicitud.setCodigoSolicitud("SOL00" + (this.listarSolicitudes().size()+1));

@@ -1,11 +1,11 @@
 package com.sistema.demo.servicio;
 
-import com.sistema.demo.entidad.Recurso;
+import com.sistema.demo.entidad.insumo;
 import com.sistema.demo.entidad.Reporte;
 import com.sistema.demo.entidad.Solicitud;
 import com.sistema.demo.entidad.Usuario;
 import com.sistema.demo.entidad.enums.Tipo;
-import com.sistema.demo.repositorio.RecursoRepositorio;
+import com.sistema.demo.repositorio.InsumoRepositorio;
 import com.sistema.demo.repositorio.ReporteRepositorio;
 import com.sistema.demo.repositorio.SolicitudRepositorio;
 import com.sistema.demo.repositorio.UsuarioRepositorio;
@@ -29,7 +29,7 @@ public class ReporteServicio {
     private SolicitudRepositorio solicitudRepositorio;
 
     @Autowired
-    private RecursoRepositorio recursoRepositorio;
+    private InsumoRepositorio insumoRepositorio;
 
 
     public List<Reporte> listarReportes() {
@@ -76,11 +76,11 @@ public class ReporteServicio {
                 return prestamos;
 
             case "inventario":
-                List<Recurso> inventario = recursoRepositorio.findAll();
+                List<insumo> inventario = insumoRepositorio.findAll();
                 return inventario;
 
             case "stock_minimo":
-                List<Recurso> stockMinimo = recursoRepositorio.findAll().stream()
+                List<insumo> stockMinimo = insumoRepositorio.findAll().stream()
                         .filter(r -> r.getCantidad() <= r.getMinimo())
                         .toList();
                 return stockMinimo;
